@@ -1,6 +1,7 @@
 package theAglomeration;
 
 import arc.Core;
+import arc.util.Log;
 import mindustry.content.Items;
 import mindustry.mod.Mod;
 import mindustry.type.ItemStack;
@@ -50,5 +51,10 @@ public class TheAglomeration extends Mod {
         zone.hasItems = true;
         zone.itemCapacity = 2000;
         zone.requirements = ItemStack.with(Items.sand, 25);
+
+        // Explicitly bind the building implementation here. Do not use a HJSON
+        // `type:` declaration for this block: Java creates and registers it directly.
+        zone.buildType = () -> zone.new ZoneBuild();
+        Log.info("[The Aglomeration] Registered custom block @ with Java class @", zone.name, zone.getClass().getName());
     }
 }
