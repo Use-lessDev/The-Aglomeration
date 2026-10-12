@@ -43,7 +43,7 @@ public class PercentBuildBase extends Block {
         saveConfig = true;
         itemCapacity = 2000;
         buildVisibility = BuildVisibility.shown;
-        requirements(Category.effect, ItemStack.with(Items.copper, 25));
+        requirements(Category.effect, ItemStack.with(Items.sand, 25));
         buildType = ZoneBuild::new;
         config(Integer.class, (ZoneBuild build, Integer houseSize) -> build.beginConstruction(houseSize));
     }
