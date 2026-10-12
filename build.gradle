@@ -24,3 +24,12 @@ java {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+tasks.named('jar') {
+    // Mindustry needs mod.hjson inside the JAR to discover and load the mod.
+    from('.') {
+        include 'mod.hjson'
+        include 'icon.png'
+        include 'assets/**'
+    }
+}
