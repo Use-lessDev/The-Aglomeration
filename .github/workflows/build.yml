@@ -36,7 +36,7 @@ jobs:
           JAR="$(find build/libs -maxdepth 1 -name '*.jar' -print -quit)"
           test -n "$JAR"
           jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase.class'
-          jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase\$ZoneBuild.class'
+          jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase$ZoneBuild.class'
           jar tf "$JAR" | grep -Fx 'theAglomeration/TheAglomeration.class'
           jar tf "$JAR" | grep -Fx 'mod.hjson'
           jar tf "$JAR" | grep -Fx 'sprites/zdcdc-construction-zone.png'
