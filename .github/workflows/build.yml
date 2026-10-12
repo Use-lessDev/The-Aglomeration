@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
           gradle-version: '8.7'
 
       - name: Compile mod
-        run: gradle clean jar --no-daemon
+        run: gradle clean jar --no-daemon --refresh-dependencies
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
@@ -36,3 +36,11 @@ jobs:
           path: build/libs/*.jar
           if-no-files-found: error
           retention-days: 14
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: The Aglomeration build ${{ github.run_number }}
+          files: build/libs/*.jar
+          generate_release_notes: true
