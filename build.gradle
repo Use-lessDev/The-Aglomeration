@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+version = '0.1.0'
+
+sourceSets.main.java.srcDirs = ['src']
+
+repositories {
+    mavenCentral()
+    ivy {
+        url = 'https://github.com/'
+        patternLayout {
+            artifact '/[organisation]/[module]/releases/download/[revision]/dependencies.jar'
+        }
+        metadataSources { artifact() }
+    }
+}
+
+dependencies {
+    compileOnly 'com.github.Anuken:Mindustry:v146'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

@@ -1,0 +1,7 @@
+name: The-Aglomeration
+displayName: The Aglomeration
+author: Use-lessDev
+description: A Mindustry mod focused on new systems, including connected construction zones.
+version: 0.1
+minGameVersion: 146
+main: theAglomeration.TheAglomeration
