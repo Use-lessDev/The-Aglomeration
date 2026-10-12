@@ -36,6 +36,8 @@ tasks.named('jar') {
     from('.') {
         include 'mod.hjson'
         include 'icon.png'
+        include 'content/**'
+        include 'sprites/**'
         include 'assets/**'
     }
 }

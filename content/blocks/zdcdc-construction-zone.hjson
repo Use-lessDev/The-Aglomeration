@@ -1,0 +1,21 @@
+type: theAglomeration.PercentBuildBase
+name: ZDCDC Construction Zone
+description: Connect these blocks into a rectangular zone, then choose a house size.
+
+category: effect
+buildVisibility: shown
+alwaysUnlocked: true
+
+size: 1
+solid: false
+destructible: true
+update: true
+configurable: true
+saveConfig: true
+
+hasItems: true
+itemCapacity: 2000
+
+requirements: [
+  sand/25
+]

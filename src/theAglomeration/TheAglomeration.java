@@ -6,7 +6,6 @@ import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
 
 public class TheAglomeration extends Mod {
-    public static PercentBuildBase constructionZone;
     public static final Block[] houses = new Block[9];
 
     @Override
@@ -31,6 +30,5 @@ public class TheAglomeration extends Mod {
             houses[size] = house;
         }
 
-        constructionZone = new PercentBuildBase("zdcdc-construction-zone");
     }
 }

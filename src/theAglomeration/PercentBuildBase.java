@@ -1,6 +1,5 @@
 package theAglomeration;
 
-import arc.Core;
 import arc.scene.ui.Dialog;
 import arc.scene.ui.layout.Table;
 import arc.util.Time;
@@ -13,10 +12,6 @@ import mindustry.gen.Icon;
 import mindustry.ui.Styles;
 import mindustry.world.Block;
 import mindustry.world.Tile;
-import mindustry.world.blocks.environment.Floor;
-import mindustry.world.meta.BuildVisibility;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
@@ -33,26 +28,11 @@ public class PercentBuildBase extends Block {
 
     public PercentBuildBase(String name) {
         super(name);
-        localizedName = "ZDCDC Construction Zone";
-        description = "Connect these blocks into a rectangular zone, then choose a house size.";
-        size = 1;
-        solid = false;
-        destructible = true;
-        update = true;
-        configurable = true;
-        saveConfig = true;
-        itemCapacity = 2000;
-        buildVisibility = BuildVisibility.shown;
-        requirements(Category.effect, ItemStack.with(Items.sand, 25));
+
+        // The HJSON content file defines the block's static properties.
+        // This subclass only supplies the custom building behavior.
         buildType = ZoneBuild::new;
         config(Integer.class, (ZoneBuild build, Integer houseSize) -> build.beginConstruction(houseSize));
-    }
-
-    @Override
-    public void load() {
-        super.load();
-        // Temporary sprite until a dedicated zone texture is added.
-        region = Core.atlas.find("copper-wall");
     }
 
     public class ZoneBuild extends Building {
