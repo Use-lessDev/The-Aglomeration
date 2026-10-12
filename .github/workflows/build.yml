@@ -40,6 +40,10 @@ jobs:
           jar tf "$JAR" | grep -Fx 'theAglomeration/TheAglomeration.class'
           jar tf "$JAR" | grep -Fx 'mod.hjson'
           jar tf "$JAR" | grep -Fx 'sprites/zdcdc-construction-zone.png'
+          if jar tf "$JAR" | grep -Fxq 'content/blocks/zdcdc-construction-zone.hjson'; then
+            echo "Do not add an HJSON block for the custom Java construction zone; it must be registered from Java."
+            exit 1
+          fi
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
