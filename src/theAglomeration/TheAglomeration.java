@@ -6,7 +6,7 @@ import mindustry.mod.Mod;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
-import mindustry.world.meta.Category;
+import mindustry.type.Category;
 
 public class TheAglomeration extends Mod {
     public static final Block[] houses = new Block[9];
