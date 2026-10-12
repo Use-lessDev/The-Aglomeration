@@ -8,17 +8,11 @@ sourceSets.main.java.srcDirs = ['src']
 
 repositories {
     mavenCentral()
-    ivy {
-        url = 'https://github.com/'
-        patternLayout {
-            artifact '/[organisation]/[module]/releases/download/[revision]/dependencies.jar'
-        }
-        metadataSources { artifact() }
-    }
+    maven { url = 'https://jitpack.io' }
 }
 
 dependencies {
-    compileOnly 'com.github.Anuken:Mindustry:v146'
+    compileOnly 'com.github.Anuken.Mindustry:core:v154'
 }
 
 java {
