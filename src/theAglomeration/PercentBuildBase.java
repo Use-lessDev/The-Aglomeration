@@ -8,13 +8,14 @@ import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.Vars;
 import mindustry.content.Items;
+import mindustry.gen.Building;
 import mindustry.gen.Icon;
 import mindustry.ui.Styles;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.meta.BuildVisibility;
-import mindustry.world.meta.Category;
+import mindustry.type.Category;
 import mindustry.type.ItemStack;
 
 import java.util.ArrayDeque;
@@ -234,20 +235,6 @@ public class PercentBuildBase extends Block {
             Tile anchor = Vars.world.tile(startX, startY);
             if (anchor != null) anchor.setBlock(TheAglomeration.houses[size], team, 0);
             Vars.ui.showInfoToast("ZDCDC-" + size + " house completed.", 3f);
-        }
-
-        @Override
-        public void draw() {
-            super.draw();
-            if (constructing) {
-                arc.graphics.g2d.Draw.color(arc.graphics.Color.white);
-                arc.graphics.g2d.Draw.alpha(0.85f);
-                arc.graphics.g2d.Font font = arc.graphics.g2d.Draw.f();
-                font.getData().setScale(0.7f);
-                arc.graphics.g2d.Draw.text(Math.round(constructionProgress * 100f) + "%", x, y + 5f);
-                font.getData().setScale(1f);
-                arc.graphics.g2d.Draw.reset();
-            }
         }
 
         @Override
