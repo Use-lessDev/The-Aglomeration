@@ -11,7 +11,7 @@ repositories {
     ivy {
         url = 'https://github.com/'
         patternLayout {
-            artifact '/[organisation]/[module]/releases/download/[revision]/dependencies.jar'
+            artifact '/[organisation]/[module]/releases/download/[revision]/Mindustry.jar'
         }
         metadataSources { artifact() }
     }
