@@ -29,6 +29,18 @@ jobs:
       - name: Compile mod
         run: gradle clean jar --no-daemon --refresh-dependencies
 
+      - name: Verify custom Java classes and block sprite are packaged
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAR="$(find build/libs -maxdepth 1 -name '*.jar' -print -quit)"
+          test -n "$JAR"
+          jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase.class'
+          jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase\$ZoneBuild.class'
+          jar tf "$JAR" | grep -Fx 'theAglomeration/TheAglomeration.class'
+          jar tf "$JAR" | grep -Fx 'mod.hjson'
+          jar tf "$JAR" | grep -Fx 'sprites/zdcdc-construction-zone.png'
+
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:

@@ -1,9 +1,12 @@
 package theAglomeration;
 
 import arc.Core;
+import mindustry.content.Items;
 import mindustry.mod.Mod;
+import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
+import mindustry.world.meta.Category;
 
 public class TheAglomeration extends Mod {
     public static final Block[] houses = new Block[9];
@@ -30,5 +33,22 @@ public class TheAglomeration extends Mod {
             houses[size] = house;
         }
 
+        // Register this block directly in Java so Mindustry cannot silently
+        // fall back to a normal Block when parsing a custom HJSON type.
+        PercentBuildBase zone = new PercentBuildBase("zdcdc-construction-zone");
+        zone.localizedName = "ZDCDC Construction Zone";
+        zone.description = "Connect these blocks into a rectangular zone, then choose a house size.";
+        zone.category = Category.effect;
+        zone.buildVisibility = BuildVisibility.shown;
+        zone.alwaysUnlocked = true;
+        zone.size = 1;
+        zone.solid = false;
+        zone.destructible = true;
+        zone.update = true;
+        zone.configurable = true;
+        zone.saveConfig = true;
+        zone.hasItems = true;
+        zone.itemCapacity = 2000;
+        zone.requirements = ItemStack.with(Items.sand, 25);
     }
 }
