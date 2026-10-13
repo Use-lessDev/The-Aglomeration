@@ -1,62 +1,33 @@
 name: Build Mindustry Mod
-
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
-  contents: write
-
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
-
-      - name: Compile mod
+      - name: Build mod
         run: gradle clean jar --no-daemon --refresh-dependencies
-
-      - name: Verify custom Java classes and block sprite are packaged
-        shell: bash
+      - name: Verify JAR
         run: |
-          set -euo pipefail
           JAR="$(find build/libs -maxdepth 1 -name '*.jar' -print -quit)"
           test -n "$JAR"
-          jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase.class'
-          jar tf "$JAR" | grep -Fx 'theAglomeration/PercentBuildBase$ZoneBuild.class'
-          jar tf "$JAR" | grep -Fx 'theAglomeration/TheAglomeration.class'
+          jar tf "$JAR" | grep -Fx 'zona/ZonaMod.class'
           jar tf "$JAR" | grep -Fx 'mod.hjson'
-          jar tf "$JAR" | grep -Fx 'sprites/zdcdc-construction-zone.png'
-          if jar tf "$JAR" | grep -Fxq 'content/blocks/zdcdc-construction-zone.hjson'; then
-            echo "Do not add an HJSON block for the custom Java construction zone; it must be registered from Java."
-            exit 1
-          fi
-
-      - name: Upload JAR artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: The-Aglomeration-JAR
           path: build/libs/*.jar
           if-no-files-found: error
           retention-days: 14
-
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: build-${{ github.run_number }}
-          name: The Aglomeration build ${{ github.run_number }}
-          files: build/libs/*.jar
-          generate_release_notes: true

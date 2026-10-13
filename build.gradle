@@ -1,43 +1,21 @@
 plugins {
     id 'java'
 }
-
-version = '0.1.0'
-
-sourceSets.main.java.srcDirs = ['src']
-
+group = 'zona'
+version = '1.0.0'
+sourceSets { main { java.srcDirs = ['src']; resources.srcDirs = ['assets'] } }
 repositories {
     mavenCentral()
     ivy {
         url = 'https://github.com/'
-        patternLayout {
-            artifact '/[organisation]/[module]/releases/download/[revision]/Mindustry.jar'
-        }
+        patternLayout { artifact '/[organisation]/[module]/releases/download/[revision]/Mindustry.jar' }
         metadataSources { artifact() }
     }
 }
-
-dependencies {
-    compileOnly 'Anuken:Mindustry:v154'
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
+dependencies { compileOnly 'Anuken:Mindustry:v154' }
+java { toolchain { languageVersion = JavaLanguageVersion.of(17) } }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 tasks.named('jar') {
-    // Mindustry needs mod.hjson inside the JAR to discover and load the mod.
-    from('.') {
-        include 'mod.hjson'
-        include 'icon.png'
-        include 'content/**'
-        include 'sprites/**'
-        include 'assets/**'
-    }
+    archiveBaseName = 'The-Aglomeration'
+    from('.') { include 'mod.hjson'; include 'icon.png'; include 'assets/**' }
 }
